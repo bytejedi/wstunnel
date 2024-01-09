@@ -95,7 +95,7 @@ struct Client {
 
     /// Use a specific prefix that will show up in the http path during the upgrade request.
     /// Useful if you need to route requests server side but don't have vhosts
-    #[arg(long, default_value = "morille", verbatim_doc_comment)]
+    #[arg(long, default_value = "v1", verbatim_doc_comment, env = "WSTUNNEL_HTTP_UPGRADE_PATH_PREFIX")]
     http_upgrade_path_prefix: String,
 
     /// Pass authorization header with basic auth credentials during the upgrade request.
@@ -154,7 +154,7 @@ struct Server {
     /// Useful if you specify in the client a custom path prefix and you want the server to only allow this one.
     /// The path prefix act as a secret to authenticate clients
     /// Disabled by default. Accept all path prefix
-    #[arg(long, verbatim_doc_comment)]
+    #[arg(short = 'r', long, verbatim_doc_comment, env = "WSTUNNEL_RESTRICT_HTTP_UPGRADE_PATH_PREFIX")]
     restrict_http_upgrade_path_prefix: Option<String>,
 
     /// [Optional] Use custom certificate (.crt) instead of the default embedded self signed certificate.
